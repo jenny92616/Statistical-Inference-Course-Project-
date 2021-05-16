@@ -1,0 +1,82 @@
+---
+title: "Exponential Distribution compare to Central limit Theorem. Basic inferential data analysis"
+author: "I D"
+output:
+  pdf_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+# set seed for reproducability, set lambda to 0.2, 40 samples, 1000 simulations
+set.seed(31)
+lambda <- 0.2
+n <- 40
+simulations <- 1000
+```
+# Load the ToothGrowth data and perform some basic exploratory data analyses
+```{r}
+# load the data ToothGrowth
+data(ToothGrowth)
+# preview the structure of the data
+str(ToothGrowth)
+# preview first 5 rows of the data
+head(ToothGrowth, 5)
+# Provide a basic summary of the data.
+# data summary
+summary(ToothGrowth)
+# compare means of the different delivery methods
+tapply(ToothGrowth$len,ToothGrowth$supp, mean)
+```
+```{r}
+# plot data graphically
+library(ggplot2)
+ggplot(ToothGrowth, aes(factor(dose), len, fill = factor(dose))) +
+  geom_boxplot() +
+  # facet_grid(.~supp)+
+  facet_grid(.~supp, labeller = as_labeller(
+    c("OJ" = "Orange juice", 
+      "VC" = "Ascorbic Acid"))) +
+  labs(title = "Tooth growth of 60 guinea pigs by dosage and\nby delivery method of vitamin C",
+       x = "Dose in milligrams/day", 
+       y = "Tooth Lengh") +
+  scale_fill_discrete(name = "Dosage of\nvitamin C\nin mg/day") +
+  theme_classic()
+```
+```{r}
+# Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose.
+# comparison by delivery method for the same dosage
+t05 <- t.test(len ~ supp, 
+              data = rbind(ToothGrowth[(ToothGrowth$dose == 0.5) & 
+                                         (ToothGrowth$supp == "OJ"),],
+                           ToothGrowth[(ToothGrowth$dose == 0.5) & 
+                                         (ToothGrowth$supp == "VC"),]), 
+              var.equal = FALSE)
+t1 <- t.test(len ~ supp, 
+             data = rbind(ToothGrowth[(ToothGrowth$dose == 1) & 
+                                        (ToothGrowth$supp == "OJ"),],
+                          ToothGrowth[(ToothGrowth$dose == 1) & 
+                                        (ToothGrowth$supp == "VC"),]), 
+             var.equal = FALSE)
+t2 <- t.test(len ~ supp, 
+             data = rbind(ToothGrowth[(ToothGrowth$dose == 2) & 
+                                        (ToothGrowth$supp == "OJ"),],
+                          ToothGrowth[(ToothGrowth$dose == 2) & 
+                                        (ToothGrowth$supp == "VC"),]), 
+             var.equal = FALSE)
+```
+# summary of the conducted t.tests, which compare the delivery methods by dosage,
+# take p-values and CI
+```{r}
+summaryBYsupp <- data.frame(
+  "p-value" = c(t05$p.value, t1$p.value, t2$p.value),
+  "Conf.Low" = c(t05$conf.int[1],t1$conf.int[1], t2$conf.int[1]),
+  "Conf.High" = c(t05$conf.int[2],t1$conf.int[2], t2$conf.int[2]),
+  row.names = c("Dosage .05","Dosage 1","Dosage 2"))
+```
+```{r}
+# show data table 
+summaryBYsupp
+```
+# Conclusion
+# For dosage of .5 milligrams/day and 1 milligrams/day does matter the delivery method. the delivery method for 2 milligrams/day. For dosage of 2 milligrams/day the delivery method doesn’t matter.
