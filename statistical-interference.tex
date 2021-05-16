@@ -1,0 +1,258 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\hypertarget{exponential-distribution-compare-to-central-limit-theorem}{%
+\section{Exponential Distribution compare to Central limit
+Theorem}\label{exponential-distribution-compare-to-central-limit-theorem}}
+
+\hypertarget{the-project-consists-of-two-parts}{%
+\section{The project consists of two
+parts:}\label{the-project-consists-of-two-parts}}
+
+\hypertarget{a-simulation-exercise.}{%
+\section{1. A simulation exercise.}\label{a-simulation-exercise.}}
+
+\hypertarget{basic-inferential-data-analysis.}{%
+\section{2. Basic inferential data
+analysis.}\label{basic-inferential-data-analysis.}}
+
+\hypertarget{a-simulation-exercise}{%
+\section{1: A simulation exercise}\label{a-simulation-exercise}}
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+\hypertarget{in-this-project-the-exponential-distribution-is-investigated-in-r-and-compare-it-with-central-limit-theorem.-the-mean-of-exponential-distribution-is-1lambda-and-the-standard-deviation-is-also-a-function-of-1lambda.-the-exponential-distribution-is-simulated-in-r-with-rexpnlambda-where-lambda0.2-for-all-of-the-simulations-sample-size-n-40-and-the-number-of-simulation-1000.}{%
+\section{In this project the exponential distribution is investigated in
+R and compare it with Central Limit Theorem. The mean of exponential
+distribution is 1/lambda and the standard deviation is also a function
+of 1/lambda. The exponential distribution is simulated in R with
+rexp(n,lambda), where lambda=0.2 for all of the simulations, sample size
+n = 40, and the number of simulation
+=1000.}\label{in-this-project-the-exponential-distribution-is-investigated-in-r-and-compare-it-with-central-limit-theorem.-the-mean-of-exponential-distribution-is-1lambda-and-the-standard-deviation-is-also-a-function-of-1lambda.-the-exponential-distribution-is-simulated-in-r-with-rexpnlambda-where-lambda0.2-for-all-of-the-simulations-sample-size-n-40-and-the-number-of-simulation-1000.}}
+
+\hypertarget{simulations}{%
+\section{Simulations}\label{simulations}}
+
+\hypertarget{a-series-of-1000-simulations-is-run-to-create-a-data-set-for-comparison-purpose.-each-simulation-contain-40-observations-and-the-expoential-distribution-function-will-be-set-to-rexp40-0.2-where-0.2-is-lambda-value.}{%
+\section{A series of 1000 simulations is run to create a data set for
+comparison purpose. Each simulation contain 40 observations and the
+expoential distribution function will be set to rexp(40, 0.2) where 0.2
+is lambda
+value.}\label{a-series-of-1000-simulations-is-run-to-create-a-data-set-for-comparison-purpose.-each-simulation-contain-40-observations-and-the-expoential-distribution-function-will-be-set-to-rexp40-0.2-where-0.2-is-lambda-value.}}
+
+\hypertarget{given-data-n-40-simnum-1000-lambda-0.2}{%
+\section{Given data: n = 40; simNum = 1000; lambda =
+0.2}\label{given-data-n-40-simnum-1000-lambda-0.2}}
+
+\hypertarget{for-reproducibility-set-seed-10000}{%
+\section{For reproducibility, set seed =
+10000}\label{for-reproducibility-set-seed-10000}}
+
+\hypertarget{exponential-sampling-parameters}{%
+\section{Exponential sampling
+parameters}\label{exponential-sampling-parameters}}
+
+\hypertarget{set-seed-for-reproducability}{%
+\section{set seed for
+reproducability}\label{set-seed-for-reproducability}}
+
+set.seed(31) \# set lambda to 0.2 lambda \textless- 0.2 \# 40 samples n
+\textless- 40 \# 1000 simulations simulations \textless- 1000 \#
+simulate simulated\_exponentials \textless- replicate(simulations,
+rexp(n, lambda)) \# calculate mean of exponentials means\_exponentials
+\textless- apply(simulated\_exponentials, 2, mean)
+
+\#Question 1
+
+\#Show where the distribution is centered at and compare it to the
+theoretical center of the distribution. analytical\_mean \textless-
+mean(means\_exponentials) analytical\_mean \# analytical mean
+theory\_mean \textless- 1/lambda theory\_mean \# visualization
+meanSample = mean(simul\(Mean) meanTheory = 1/lambda hist(simul\)Mean,
+breaks = 30, prob = TRUE,col = ``lightblue'', main=``Exponential
+Distribution of Sample Means'', xlab=``Means of 40 Simulated Samples'',
+ylab = ``Counts'') abline(v = meanTheory, col= ``red'', lwd = 3)
+abline(v = meanSample, col = ``blue'',lwd = 2) legend(`topright',
+c(``Sample Mean'', ``Theoretical Mean''), bty = ``n'',\\
+lty = c(1,1), col = c(col = ``blue'', col = ``red'')) \# The analytics
+mean is 5.006 the theoretical mean 5. The center of distribution of
+averages of 40 exponentials is very close to the theoretical center of
+the distribution.
+
+\hypertarget{question-2}{%
+\section{Question 2}\label{question-2}}
+
+\hypertarget{show-how-variable-it-is-and-compare-it-to-the-theoretical-variance-of-the-distribution..}{%
+\section{Show how variable it is and compare it to the theoretical
+variance of the
+distribution..}\label{show-how-variable-it-is-and-compare-it-to-the-theoretical-variance-of-the-distribution..}}
+
+\hypertarget{standard-deviation-of-distribution}{%
+\section{standard deviation of
+distribution}\label{standard-deviation-of-distribution}}
+
+standard\_deviation\_dist \textless- sd(means\_exponentials)
+standard\_deviation\_dist
+
+\hypertarget{standard-deviation-from-analytical-expression}{%
+\section{standard deviation from analytical
+expression}\label{standard-deviation-from-analytical-expression}}
+
+standard\_deviation\_theory \textless- (1/lambda)/sqrt(n)
+standard\_deviation\_theory
+
+\hypertarget{variance-of-distribution}{%
+\section{variance of distribution}\label{variance-of-distribution}}
+
+variance\_dist \textless- standard\_deviation\_dist\^{}2 variance\_dist
+\# variance from analytical expression variance\_theory \textless-
+((1/lambda)*(1/sqrt(n)))\^{}2 variance\_theory
+
+\hypertarget{standard-deviation-of-the-distribution-is-0.7931608-with-the-theoretical-sd-calculated-as-0.7905694.-the-theoretical-variance-is-calculated-as-1-1n2-0.625.-the-actual-variance-of-the-distribution-is-0.6291041}{%
+\section{Standard Deviation of the distribution is 0.7931608 with the
+theoretical SD calculated as 0.7905694. The Theoretical variance is
+calculated as ((1 / ??) * (1/???n))2 = 0.625. The actual variance of the
+distribution is
+0.6291041}\label{standard-deviation-of-the-distribution-is-0.7931608-with-the-theoretical-sd-calculated-as-0.7905694.-the-theoretical-variance-is-calculated-as-1-1n2-0.625.-the-actual-variance-of-the-distribution-is-0.6291041}}
+
+\hypertarget{question-3}{%
+\section{Question 3}\label{question-3}}
+
+\hypertarget{show-that-the-distribution-is-approximately-normal.}{%
+\section{Show that the distribution is approximately
+normal.}\label{show-that-the-distribution-is-approximately-normal.}}
+
+xfit \textless- seq(min(means\_exponentials), max(means\_exponentials),
+length=100) yfit \textless- dnorm(xfit, mean=1/lambda,
+sd=(1/lambda/sqrt(n)))
+hist(means\_exponentials,breaks=n,prob=T,col=``skyblue'',xlab =
+``means'',main=``Density of means'',ylab=``density'') lines(xfit, yfit,
+pch=22, col=``red'', lty=5) \# compare the distribution of averages of
+40 exponentials to a normal distribution qqnorm(means\_exponentials)
+qqline(means\_exponentials, col = 2) \# Due to Due to the central limit
+theorem (CLT), the distribution of averages of 40 exponentials is very
+close to a normal distribution. \# 2. Basic inferential data analysis.
+\# Load the ToothGrowth data and perform some basic exploratory data
+analyses \# load the data ToothGrowth data(ToothGrowth) \# preview the
+structure of the data str(ToothGrowth) \# preview first 5 rows of the
+data head(ToothGrowth, 5) \# Provide a basic summary of the data. \#
+data summary summary(ToothGrowth) \# compare means of the different
+delivery methods tapply(ToothGrowth\(len,ToothGrowth\)supp, mean) \#
+plot data graphically library(ggplot2) ggplot(ToothGrowth,
+aes(factor(dose), len, fill = factor(dose))) + geom\_boxplot() + \#
+facet\_grid(.\textasciitilde supp)+ facet\_grid(.\textasciitilde supp,
+labeller = as\_labeller( c(``OJ'' = ``Orange juice'', ``VC'' =
+``Ascorbic Acid''))) + labs(title = ``Tooth growth of 60 guinea pigs by
+dosage and\nby delivery method of vitamin C'', x = ``Dose in
+milligrams/day'', y = ``Tooth Lengh'') + scale\_fill\_discrete(name =
+``Dosage of\nvitamin C\nin mg/day'') + theme\_classic() \# Use
+confidence intervals and/or hypothesis tests to compare tooth growth by
+supp and dose. \# comparison by delivery method for the same dosage t05
+\textless- t.test(len \textasciitilde{} supp, data =
+rbind(ToothGrowth{[}(ToothGrowth\(dose == 0.5) &  (ToothGrowth\)supp ==
+``OJ''),{]},
+ToothGrowth{[}(ToothGrowth\(dose == 0.5) &  (ToothGrowth\)supp ==
+``VC''),{]}), var.equal = FALSE)
+
+t1 \textless- t.test(len \textasciitilde{} supp, data =
+rbind(ToothGrowth{[}(ToothGrowth\(dose == 1) &  (ToothGrowth\)supp ==
+``OJ''),{]},
+ToothGrowth{[}(ToothGrowth\(dose == 1) &  (ToothGrowth\)supp ==
+``VC''),{]}), var.equal = FALSE)
+
+t2 \textless- t.test(len \textasciitilde{} supp, data =
+rbind(ToothGrowth{[}(ToothGrowth\(dose == 2) &  (ToothGrowth\)supp ==
+``OJ''),{]},
+ToothGrowth{[}(ToothGrowth\(dose == 2) &  (ToothGrowth\)supp ==
+``VC''),{]}), var.equal = FALSE)
+
+\hypertarget{summary-of-the-conducted-t.tests-which-compare-the-delivery-methods-by-dosage}{%
+\section{summary of the conducted t.tests, which compare the delivery
+methods by
+dosage,}\label{summary-of-the-conducted-t.tests-which-compare-the-delivery-methods-by-dosage}}
+
+\hypertarget{take-p-values-and-ci}{%
+\section{take p-values and CI}\label{take-p-values-and-ci}}
+
+summaryBYsupp \textless- data.frame( ``p-value'' =
+c(t05\(p.value, t1\)p.value,
+t2\(p.value),  "Conf.Low" = c(t05\)conf.int{[}1{]},t1\(conf.int[1], t2\)conf.int{[}1{]}),
+``Conf.High'' = c(t05\(conf.int[2],t1\)conf.int{[}2{]},
+t2\$conf.int{[}2{]}), row.names = c(``Dosage .05'',``Dosage 1'',``Dosage
+2''))
+
+\hypertarget{show-data-table}{%
+\section{show data table}\label{show-data-table}}
+
+summaryBYsupp \# Conclusion \# For dosage of .5 milligrams/day and 1
+milligrams/day does matter the delivery method. the delivery method for
+2 milligrams/day. For dosage of 2 milligrams/day the delivery method
+doesn't matter.
+
+\end{document}
